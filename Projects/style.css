@@ -237,7 +237,7 @@ body {
 }
 .box:nth-child(1)::before,
 .box:nth-child(1)::after {
-    background: linear-gradient(315deg, #ffbc00, #ff0058);
+    background: linear-gradient(315deg, #993efe, #f735cb);
 }
 .box:nth-child(2)::before,
 .box:nth-child(2)::after {
