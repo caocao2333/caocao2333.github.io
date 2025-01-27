@@ -27,12 +27,12 @@ body {
 }
 body::after {
   content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: conic-gradient(from 180deg at 50% 50%, #5DE2E7 -97.5deg, #98F5F9 14.5deg, #7DDA58 54.01deg, #E7DDFF 113.42deg, #00b6b6 185.62deg, #FFECA1 262.5deg, #EFC3CA 374.05deg);
+  position: relative;
+  top: -5%;
+  right: -5%;
+  bottom: -5%;
+  left: -5%;
+  background: conic-gradient(from 180deg at 2.5% 2.5%, #5DE2E7 -97.5deg, #98F5F9 14.5deg, #7DDA58 54.01deg, #E7DDFF 113.42deg, #00b6b6 185.62deg, #FFECA1 262.5deg, #EFC3CA 374.05deg);
   z-index: -1;
   filter: blur(300px) brightness(1.5);
   animation: 60s move linear infinite;
