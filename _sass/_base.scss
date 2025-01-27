@@ -34,11 +34,15 @@ body {
   position: relative;
   padding: 40px;
   box-sizing: border-box;
-  overflow: hidden;
+  //overflow: hidden;
   font-family: '-apple-system', Arial, sans-serif;
   background-color: transparent;
   margin: 0;
   padding: 0;
+  &.overflow--hidden {
+        /* when primary navigation is visible, the content in the background won't scroll */
+        overflow: hidden;
+      }
 }
 body::after {
   content: '';
