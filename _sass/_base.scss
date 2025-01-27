@@ -19,7 +19,6 @@ body {
   font-family: $global-font-family;
   line-height: 1.5;
   background-color: transparent;
-  overflow: hidden;
 
   &.overflow--hidden {
     /* when primary navigation is visible, the content in the background won't scroll */
@@ -29,10 +28,10 @@ body {
 body::after {
   content: '';
   position: relative;
-  top: -100%;
-  right: -100%;
-  bottom: -100%;
-  left: -100%;
+  top: -50%;
+  right: -50%;
+  bottom: -50%;
+  left: -50%;
   background: conic-gradient(from 180deg at 50% 50%, #5DE2E7 -97.5deg, #98F5F9 14.5deg, #7DDA58 54.01deg, #E7DDFF 113.42deg, #00b6b6 185.62deg, #FFECA1 262.5deg, #EFC3CA 374.05deg);
   z-index: -1;
   filter: blur(300px) brightness(1.5);
