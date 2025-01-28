@@ -259,7 +259,7 @@
     padding: 5px;
     border: 1px solid $border-color;
     border-radius: $border-radius;
-    background: #fff;
+    background: #000;
     box-shadow: 0 0 10px rgba(#000, 0.25);
 
     a {
@@ -268,8 +268,8 @@
       font-size: $type-size-5;
 
       &:hover {
-        color: $masthead-link-color-hover;
-        background: mix(#fff, $primary-color, 75%);
+        color: #fefc4f;
+        background: #000;
       }
     }
 
