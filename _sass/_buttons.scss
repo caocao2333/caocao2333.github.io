@@ -166,4 +166,34 @@
     background-color: #fefc4f;
     color: #700000;
   }
+
+  &--text_highlight {
+    display: inline-block;
+  }
+
+  &--text_highlight:first-letter {
+    color: #000;
+  }
+
+  &:focus {
+    color: #700000;
+  }
+
+  &:hover {
+    background-color: #fefc4f;
+    cursor: pointer;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    bottom: -4px;
+    left: -4px;
+  }
+
+  &:first-letter {
+    color: #000
+  }
 }
