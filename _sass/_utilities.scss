@@ -332,7 +332,17 @@ body:hover .visually-hidden button {
   -webkit-transition: 0.3s;
   transition: 0.3s;
 
-  &:before,
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: $navicon-width;
+    height: $navicon-height;
+    background: #fff;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+  }
+
   &:after {
     content: "";
     position: absolute;
