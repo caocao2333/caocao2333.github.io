@@ -8,14 +8,14 @@ $(document).ready(function(){
 
   // Sticky footer
   var bumpIt = function() {
-        $("body").css("margin-bottom", "175px"); // Set a constant margin of 175px
+        $("body").css("margin-bottom", "0"); // Set a constant margin of 175px
       },
       didResize = false;
 
   bumpIt();
 
   $(window).resize(function() {
-    didResize = true;
+    didResize = false;
   });
   setInterval(function() {
     if (didResize) {
