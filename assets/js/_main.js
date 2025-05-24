@@ -7,12 +7,28 @@ $(document).ready(function(){
   scssLarge = 925; // pixels
 
   // Sticky footer
-  var bumpIt = function() {
-      $("body").css("margin-bottom", $(".page__footer").outerHeight(true));
-    },
-    didResize = false;
+var bumpIt = function() {
+    var footerHeight = $(".page__footer").outerHeight(true) || 0; // Get footer height
+    var contentHeight = $("body").height() - footerHeight; // Calculate content height
+    if (contentHeight > 0) {
+        $("body").css("margin-bottom", footerHeight); // Adjust margin only if necessary
+    } else {
+        $("body").css("margin-bottom", 0); // Reset margin if not needed
+    }
+},
+didResize = false;
 
-  bumpIt();
+bumpIt();
+
+$(window).resize(function() {
+    didResize = true;
+});
+setInterval(function() {
+    if (didResize) {
+        didResize = false;
+        bumpIt();
+    }
+}, 250);
 
   $(window).resize(function() {
     didResize = true;
