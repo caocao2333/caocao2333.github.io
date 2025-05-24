@@ -7,22 +7,22 @@ $(document).ready(function(){
   scssLarge = 925; // pixels
 
   // Sticky footer
-  var bumpIt = function() {
-      $("body").css("margin-bottom", 0);
-    },
-    didResize = false;
-
-  bumpIt();
-
-  $(window).resize(function() {
-    didResize = true;
-  });
-  setInterval(function() {
-    if (didResize) {
-      didResize = false;
-      bumpIt();
-    }
-  }, 250);
+  // var bumpIt = function() {
+  //     $("body").css("margin-bottom", 0);
+  //   },
+  //   didResize = false;
+  //
+  // bumpIt();
+  //
+  // $(window).resize(function() {
+  //   didResize = true;
+  // });
+  // setInterval(function() {
+  //   if (didResize) {
+  //     didResize = false;
+  //     bumpIt();
+  //   }
+  // }, 250);
   
   // FitVids init
   fitvids();
