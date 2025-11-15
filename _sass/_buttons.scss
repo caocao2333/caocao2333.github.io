@@ -197,3 +197,45 @@
     color: #000
   }
 }
+
+/* larger retro button variant */
+.retro_btn--large {
+  font-size: 14px;
+  line-height: 20px;
+  padding: 6px 18px;
+}
+
+/* white variant with dark text */
+.retro_btn--white {
+  background-color: #fff;
+  color: #111;
+}
+.retro_btn--white:first-letter { color: #111; }
+
+/* spacing and sizing for retro prev/next buttons without wrapping */
+.pagination .pagination--pager.retro_btn {
+  box-sizing: border-box;
+  width: calc(50% - 8px);
+  margin: 0 4px;
+  color: #111; /* ensure full label is dark, not gray */
+}
+
+.pagination .pagination--pager.retro_btn.disabled {
+  color: #111; /* keep disabled consistent in color theme */
+  pointer-events: auto; /* allow hover/click feedback */
+  cursor: pointer;
+}
+
+/* disabled retro buttons: hover red tone */
+.pagination .pagination--pager.retro_btn.disabled:hover {
+  background-color: #ffd6d6;
+  color: #700000;
+}
+
+/* ensure first character follows the current color (fix bracket/first letter mismatch) */
+.pagination .pagination--pager.retro_btn:first-letter {
+  color: inherit;
+}
+.pagination .pagination--pager.retro_btn.disabled:hover:first-letter {
+  color: #700000;
+}

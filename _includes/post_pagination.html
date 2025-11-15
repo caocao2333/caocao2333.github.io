@@ -2,15 +2,26 @@
 
 {% if page.previous or page.next %}
   <nav class="pagination">
+    {% assign use_retro = page.collection == 'projects' or page.collection == 'publications' %}
     {% if page.previous %}
-      <a href="{{ base_path }}{{ page.previous.url }}" class="pagination--pager" title="{{ page.previous.title | markdownify | strip_html }}">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</a>
+      <a href="{{ base_path }}{{ page.previous.url }}"
+         class="pagination--pager{% if use_retro %} retro_btn retro_btn--white retro_btn--large{% endif %}"
+         {% if use_retro %}data-pager="prev"{% endif %}
+         title="{{ page.previous.title | markdownify | strip_html }}">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</a>
     {% else %}
-      <a href="#" class="pagination--pager disabled">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</a>
+      <a href="#"
+        class="pagination--pager disabled{% if use_retro %} retro_btn retro_btn--white retro_btn--large{% endif %}"
+        {% if use_retro %}data-pager="prev"{% endif %}>{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</a>
     {% endif %}
     {% if page.next %}
-      <a href="{{ base_path }}{{ page.next.url }}" class="pagination--pager" title="{{ page.next.title | markdownify | strip_html }}">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</a>
+      <a href="{{ base_path }}{{ page.next.url }}"
+         class="pagination--pager{% if use_retro %} retro_btn retro_btn--white retro_btn--large{% endif %}"
+         {% if use_retro %}data-pager="next"{% endif %}
+         title="{{ page.next.title | markdownify | strip_html }}">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</a>
     {% else %}
-      <a href="#" class="pagination--pager disabled">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</a>
+      <a href="#"
+        class="pagination--pager disabled{% if use_retro %} retro_btn retro_btn--white retro_btn--large{% endif %}"
+        {% if use_retro %}data-pager="next"{% endif %}>{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</a>
     {% endif %}
   </nav>
 {% endif %}

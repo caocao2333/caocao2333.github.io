@@ -3,10 +3,49 @@ layout: archive
 title: "Projects"
 permalink: /projects/
 author_profile: true
+classes: projects-page
 ---
 
 {% include base_path %}
 
-{% for post in site.projects reversed %}
-  {% include archive-single.html %}
-{% endfor %}
+<div class="projects-grid-wrapper">
+  <div class="projects-grid">
+    {% assign items = site.projects %}
+    {% for project in items %}
+    {% assign gradient = project.gradient %}
+    {% if gradient == nil or gradient == '' %}
+      {% if project.color_start and project.color_end %}
+        {% capture gradient %}linear-gradient(315deg, {{ project.color_start }}, {{ project.color_end }}){% endcapture %}
+      {% else %}
+        {% assign gradient = 'linear-gradient(315deg, #993efe, #f735cb)' %}
+      {% endif %}
+    {% endif %}
+    <div class="project-box" style="--pane-gradient: {{ gradient }};">
+      <span class="effect-span"></span>
+      <div class="project-content">
+        <h3>{{ project.title | replace: '\n', '<br />' | append: '[[END]]' | newline_to_br | replace: '<br />\n[[END]]', '<br /><br />' | replace: '<br />[[END]]', '<br /><br />' | replace: '[[END]]', '' }}</h3>
+        <p>{{ project.excerpt | markdownify | strip_html | replace: '\n', '<br />' | append: '[[END]]' | newline_to_br | replace: '<br />\n[[END]]', '<br /><br />' | replace: '<br />[[END]]', '<br /><br />' | replace: '[[END]]', '' }}</p>
+        <a class="project-btn" href="{{ project.link | default: project.url | relative_url }}"{% if project.link %} target="_blank" rel="noopener"{% endif %}>View</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+(function() {
+  function equalizeProjectHeights() {
+    var contents = Array.prototype.slice.call(document.querySelectorAll('.projects-grid .project-box .project-content'));
+    if (!contents.length) return;
+    // reset min-height before measuring
+    contents.forEach(function(c){ c.style.minHeight = '0px'; });
+    var max = 0;
+    contents.forEach(function(c){ max = Math.max(max, c.offsetHeight); });
+    // set baseline equal size but allow growth on hover
+    contents.forEach(function(c){ c.style.minHeight = max + 'px'; });
+  }
+  window.addEventListener('load', equalizeProjectHeights);
+  window.addEventListener('resize', equalizeProjectHeights);
+})();
+</script>
+  </div>

@@ -48,18 +48,32 @@ layout: default
         {{ content }}
 
         {% if page.citation and page.paperurl and page.slidesurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a> | <a href="{{ page.slidesurl }}">Download Slides</a></p>
+          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br />
+            <a class="retro_btn retro_btn--white{% if page.collection == 'publications' %} retro_btn--large{% endif %}" href="{{ page.paperurl }}" style="margin-top:8px; display:inline-block;">Download Paper</a>
+            |
+            <a class="retro_btn retro_btn--white{% if page.collection == 'publications' %} retro_btn--large{% endif %}" href="{{ page.slidesurl }}">Download Slides</a>
+          </p>
         {% elsif page.citation and page.paperurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a></p>
+          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br />
+            <a class="retro_btn retro_btn--white{% if page.collection == 'publications' %} retro_btn--large{% endif %}" href="{{ page.paperurl }}" style="margin-top:8px; display:inline-block;">Download Paper</a>
+          </p>
         {% elsif page.citation and page.slidesurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.slidesurl }}">Download Slides</a></p>
+          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br />
+            <a class="retro_btn retro_btn--white{% if page.collection == 'publications' %} retro_btn--large{% endif %}" href="{{ page.slidesurl }}" style="margin-top:8px; display:inline-block;">Download Slides</a>
+          </p>
         {% elsif page.citation %}
           <p style="font-size: smaller">Recommended citation: {{ page.citation }}</p>
         {% elsif page.slidesurl %}
-          <p style="font-size: smaller"><a href="{{ page.slidesurl }}">Download Slides</a></p>
+          <p style="font-size: smaller"><a class="retro_btn retro_btn--accent" href="{{ page.slidesurl }}">Download Slides</a></p>
         {% endif %}
 
-        {% if page.link %}<div><a href="{{ page.link }}" class="btn">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
+        {% if page.link %}
+          {% if page.collection == 'publications' or page.collection == 'projects' %}
+            <div><a href="{{ page.link }}" class="retro_btn retro_btn--white{% if page.collection == 'publications' %} retro_btn--large{% endif %}">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>
+          {% else %}
+            <div><a href="{{ page.link }}" class="btn">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>
+          {% endif %}
+        {% endif %}
       </section>
 
       <footer class="page__meta">
@@ -69,9 +83,34 @@ layout: default
         {% include page__taxonomy.html %}
       </footer>
 
-      {% if page.share %}{% include social-share.html %}{% endif %}
+      {% if page.share and page.collection != 'publications' and page.collection != 'projects' %}{% include social-share.html %}{% endif %}
 
       {% include post_pagination.html %}
+      <script>
+      (function(){
+        function wireDisabledPagerMessages(){
+          var btns = Array.prototype.slice.call(document.querySelectorAll('.pagination .pagination--pager.retro_btn.disabled'));
+          btns.forEach(function(btn){
+            btn.addEventListener('click', function(ev){
+              ev.preventDefault();
+              var role = btn.getAttribute('data-pager');
+              var original = btn.textContent;
+              if(role === 'prev'){
+                btn.textContent = '[Beginning of Entry]';
+              } else if(role === 'next'){
+                btn.textContent = '[End of Entry]';
+              }
+              setTimeout(function(){ btn.textContent = original; }, 1200);
+            });
+          });
+        }
+        if(document.readyState === 'loading'){
+          document.addEventListener('DOMContentLoaded', wireDisabledPagerMessages);
+        } else {
+          wireDisabledPagerMessages();
+        }
+      })();
+      </script>
     </div>
 
     {% if site.comments.provider and page.comments %}
