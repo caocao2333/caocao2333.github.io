@@ -1,8 +1,62 @@
 {% include base_path %}
 
-{% if page.previous or page.next %}
+{% if page.collection == 'publications' %}
+  {% comment %}Custom ordering: conferences -> poster -> manuscripts; newest first within each{% endcomment %}
+  {% assign conf = site.publications | where: "category", "conferences" | sort: "date" | reverse %}
+  {% assign posters = site.publications | where: "category", "poster" | sort: "date" | reverse %}
+  {% assign manus = site.publications | where: "category", "manuscripts" | sort: "date" | reverse %}
+  {% assign pubs = conf | concat: posters | concat: manus %}
+
+  {% assign prev_url = nil %}
+  {% assign prev_title = nil %}
+  {% assign next_url = nil %}
+  {% assign next_title = nil %}
+  {% assign found = false %}
+
+  {% assign last_url = nil %}
+  {% assign last_title = nil %}
+  {% for doc in pubs %}
+    {% if found and next_url == nil %}
+      {% assign next_url = doc.url %}
+      {% assign next_title = doc.title %}
+      {% break %}
+    {% endif %}
+    {% if doc.url == page.url %}
+      {% assign prev_url = last_url %}
+      {% assign prev_title = last_title %}
+      {% assign found = true %}
+    {% endif %}
+    {% assign last_url = doc.url %}
+    {% assign last_title = doc.title %}
+  {% endfor %}
+
   <nav class="pagination">
-    {% assign use_retro = page.collection == 'projects' or page.collection == 'publications' %}
+    {% assign use_retro = true %}
+    {% if prev_url %}
+      <a href="{{ base_path }}{{ prev_url }}"
+         class="pagination--pager retro_btn retro_btn--white retro_btn--large"
+         data-pager="prev"
+         title="{{ prev_title | markdownify | strip_html }}">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</a>
+    {% else %}
+      <a href="#"
+         class="pagination--pager disabled retro_btn retro_btn--white retro_btn--large"
+         data-pager="prev">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</a>
+    {% endif %}
+
+    {% if next_url %}
+      <a href="{{ base_path }}{{ next_url }}"
+         class="pagination--pager retro_btn retro_btn--white retro_btn--large"
+         data-pager="next"
+         title="{{ next_title | markdownify | strip_html }}">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</a>
+    {% else %}
+      <a href="#"
+         class="pagination--pager disabled retro_btn retro_btn--white retro_btn--large"
+         data-pager="next">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</a>
+    {% endif %}
+  </nav>
+{% elsif page.previous or page.next %}
+  <nav class="pagination">
+    {% assign use_retro = page.collection == 'projects' %}
     {% if page.previous %}
       <a href="{{ base_path }}{{ page.previous.url }}"
          class="pagination--pager{% if use_retro %} retro_btn retro_btn--white retro_btn--large{% endif %}"

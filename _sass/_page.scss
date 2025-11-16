@@ -263,16 +263,64 @@
 
 .page__taxonomy-item {
   display: inline-block;
-  margin-right: 5px;
-  margin-bottom: 8px;
-  padding: 5px 10px;
+  margin-right: 8px;
+  margin-bottom: 10px;
+  padding: 6px 12px;
   text-decoration: none;
-  border: 1px solid $light-gray;
+  background: #fff;
+  color: #111;
+  border: 1px solid #111;
   border-radius: $border-radius;
+  box-shadow: 4px 4px 0 0 #000;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, color 0.15s ease, background-color 0.15s ease;
 
   &:hover {
     text-decoration: none;
-    color: $link-color-hover;
+    background: #fefc4f;
+    color: #700000;
+    box-shadow: 6px 6px 0 0 #000;
+    transform: translate(-1px, -1px);
+  }
+}
+
+/* Publications: render taxonomy chips as normal text links */
+.pub-plain-taxonomy {
+  color: #111; /* ensure black text inside the taxonomy block */
+
+  .page__taxonomy .sep {
+    display: inline; /* show the comma separators */
+  }
+
+  .page__taxonomy-item {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    margin: 0 0.3em 0 0;
+    display: inline;
+    color: #111;
+    text-decoration: underline;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    box-shadow: none;
+    position: static;
+    transition: none;
+
+    &::before,
+    &::after {
+      content: none;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: transparent;
+      color: #111;
+      transform: none;
+      outline: none;
+      text-decoration: underline;
+      box-shadow: none;
+    }
   }
 }
 

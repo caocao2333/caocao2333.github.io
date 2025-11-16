@@ -172,7 +172,7 @@
   }
 
   &--text_highlight:first-letter {
-    color: #000;
+    color: inherit;
   }
 
   &:focus {
@@ -194,7 +194,7 @@
   }
 
   &:first-letter {
-    color: #000
+    color: inherit;
   }
 }
 

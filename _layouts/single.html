@@ -49,13 +49,13 @@ layout: default
 
         {% if page.citation and page.paperurl and page.slidesurl %}
           <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br />
-            <a class="retro_btn retro_btn--white{% if page.collection == 'publications' %} retro_btn--large{% endif %}" href="{{ page.paperurl }}" style="margin-top:8px; display:inline-block;">Download Paper</a>
+            <a class="retro_btn retro_btn--white{% if page.collection == 'publications' %} retro_btn--large{% endif %}" href="{{ page.paperurl }}" style="margin-top:8px; display:inline-block;">{% if page.collection == 'publications' and page.category == 'poster' %}Download Poster{% else %}Download Paper{% endif %}</a>
             |
             <a class="retro_btn retro_btn--white{% if page.collection == 'publications' %} retro_btn--large{% endif %}" href="{{ page.slidesurl }}">Download Slides</a>
           </p>
         {% elsif page.citation and page.paperurl %}
           <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br />
-            <a class="retro_btn retro_btn--white{% if page.collection == 'publications' %} retro_btn--large{% endif %}" href="{{ page.paperurl }}" style="margin-top:8px; display:inline-block;">Download Paper</a>
+            <a class="retro_btn retro_btn--white{% if page.collection == 'publications' %} retro_btn--large{% endif %}" href="{{ page.paperurl }}" style="margin-top:8px; display:inline-block;">{% if page.collection == 'publications' and page.category == 'poster' %}Download Poster{% else %}Download Paper{% endif %}</a>
           </p>
         {% elsif page.citation and page.slidesurl %}
           <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br />
@@ -80,7 +80,13 @@ layout: default
         {% if site.data.ui-text[site.locale].meta_label %}
           <h4 class="page__meta-title">{{ site.data.ui-text[site.locale].meta_label }}</h4>
         {% endif %}
-        {% include page__taxonomy.html %}
+        {% if page.collection == 'publications' %}
+          <div class="pub-plain-taxonomy">
+            {% include page__taxonomy.html %}
+          </div>
+        {% else %}
+          {% include page__taxonomy.html %}
+        {% endif %}
       </footer>
 
       {% if page.share and page.collection != 'publications' and page.collection != 'projects' %}{% include social-share.html %}{% endif %}
@@ -96,7 +102,7 @@ layout: default
               var role = btn.getAttribute('data-pager');
               var original = btn.textContent;
               if(role === 'prev'){
-                btn.textContent = '[Beginning of Entry]';
+                btn.textContent = '[Start of Entry]';
               } else if(role === 'next'){
                 btn.textContent = '[End of Entry]';
               }
